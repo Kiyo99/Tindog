@@ -8,12 +8,12 @@
     color: white;
 }
 
-#press{
+#press {
     background-color: brown;
     padding-bottom: 3%;
 }
 
-body{
+body {
     font-family: "Montserrat";
     height: 100%;
     width: 100%;
@@ -30,25 +30,25 @@ body{
 
 } */
 
-.container-fluid{
+.container-fluid {
     padding: 3% 10%;
 }
 
-.navbar{
+.navbar {
     padding-bottom: 4.5rem;
 }
 
-.nav-item{
+.nav-item {
     padding: 0 18px;
 }
 
-.nav-link{
+.nav-link {
     font-size: 1.2rem;
     font-family: 'Montserrat-Light';
     /* color: ; */
 }
 
-.navbar-brand{
+.navbar-brand {
     font-family: 'Exo';
     font-weight: bold;
     font-size: 2.5rem;
@@ -58,51 +58,51 @@ h1 {
     font-family: 'Montserrat-Black, sans-serif';
     font-size: 3.5rem;
     line-height: 1.5;
-    font-weight:900;
+    font-weight: 900;
     color: white;
 }
 
-h2{
+h2 {
     font-family: 'Exo';
     font-weight: bold;
 }
 
 
-h3{
+h3 {
     font-family: 'Exo';
     font-weight: bold;
 }
 
 /* Download Buttons */
-.download-button{
+.download-button {
     margin: 5% 3% 5% 0%;
 }
 
 /* Title Image */
-.title-image{
+.title-image {
     width: 60%;
     transform: rotate(25deg);
 }
 
 /* Feautures Section */
-.features-title{
+.features-title {
     font-family: 'Montserrat-bold';
     font-size: 1.5rem;
     font-weight: bolder;
 }
 
-.features-p{
+.features-p {
     color: #8f8f8f;
 }
 
-#features{
+#features {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     align-self: center;
 }
 
-.fea-col{
+.fea-col {
     padding: 3%;
     display: flex;
     flex-direction: column;
@@ -110,34 +110,39 @@ h3{
     align-items: center;
 }
 
-.fa-solid{
+.fa-solid {
     color: #ef8172;
 }
 
-.fa-solid:hover{
+.fa-solid:hover {
     color: #ff4c68;
 }
 
 /* Testimonials and press */
-.testimonial-text{
-font-family: 'Montserrat';
-font-weight: bold;
-line-height: 1.5;
-font-size: 2rem;
+.testimonial-text {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    line-height: 1.5;
+    font-size: 2rem;
 }
 
-.testimonial-image{
-width: 10%;
-border-radius: 100%;
-margin: 20px;
+.testimonial-image {
+    width: 10%;
+    border-radius: 100%;
+    margin: 20px;
 }
 
-.press-logo{
+.press-logo {
     width: 15%;
     margin: 20px 20px 50px;
 }
 
 /*Pricing Section*/
-#pricing{
+#pricing {
     padding: 100px;
+}
+
+/*CTA section*/
+.cta-title {
+    color: white;
 }
