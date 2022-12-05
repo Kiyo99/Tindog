@@ -11,12 +11,10 @@ app.get("/", function (req, res) {
 });
 
 app.post("/apple", function (req, res) {
-    console.log(req);
     res.send("<h1>Waiting to download apple app...")
 });
 
 app.post("/play", function (req, res) {
-    console.log(req);
     res.send("<h1>Waiting to download Google play app...")
 });
 
