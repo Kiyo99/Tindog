@@ -3,22 +3,23 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const initializeApp = require('firebase/app');
 const getAnalytics = require('firebase/analytics');
+const { getFirestore, collection, getDocs } = require('firebase/firestore/lite');
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
-  authDomain: "pamo-auth.firebaseapp.com",
-  projectId: "pamo-auth",
-  storageBucket: "pamo-auth.appspot.com",
-  messagingSenderId: "887944170654",
-  appId: "1:887944170654:web:b29c69a1774fa51683ff8f",
-  measurementId: "G-MEKYMTMJPV"
+    apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
+    authDomain: "pamo-auth.firebaseapp.com",
+    projectId: "pamo-auth",
+    storageBucket: "pamo-auth.appspot.com",
+    messagingSenderId: "887944170654",
+    appId: "1:887944170654:web:b29c69a1774fa51683ff8f",
+    measurementId: "G-MEKYMTMJPV"
 };
 
 // Initialize Firebase
-const FireApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(FireApp);
+// const FireApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp.initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+
 
 const app = express();
 
@@ -26,6 +27,22 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
+
+
+
+// Get a list of cities from your database
+async function getUser(db) {
+    const usersCOl = collection(db, 'users');
+    const usersSnapshot = await getDocs(usersCol);
+    const usersList = usersSnapshot.docs.map(doc => doc.data());
+    console.log(usersList);
+    return usersList;
+}
+
+
+
+
+
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
@@ -60,6 +77,8 @@ app.post("/api/save", function (req, res) {
     let dob = req.body.dob;
     let gender = req.body.gender;
     let marriageStatus = req.body.marriageStatus;
+
+    getUser();
 
 
     res.json({
