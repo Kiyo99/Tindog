@@ -1,6 +1,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const initializeApp = require('firebase/app');
+const getAnalytics = require('firebase/analytics');
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
+  authDomain: "pamo-auth.firebaseapp.com",
+  projectId: "pamo-auth",
+  storageBucket: "pamo-auth.appspot.com",
+  messagingSenderId: "887944170654",
+  appId: "1:887944170654:web:b29c69a1774fa51683ff8f",
+  measurementId: "G-MEKYMTMJPV"
+};
+
+// Initialize Firebase
+const FireApp = initializeApp(firebaseConfig);
+const analytics = getAnalytics(FireApp);
 
 const app = express();
 
