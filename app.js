@@ -1,6 +1,26 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const initializeApp = require('firebase/app');
+const getAnalytics = require('firebase/analytics');
+const { getFirestore, collection, getDocs, setDoc, doc } = require('firebase/firestore/lite');
+const { json } = require("body-parser");
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
+    authDomain: "pamo-auth.firebaseapp.com",
+    projectId: "pamo-auth",
+    storageBucket: "pamo-auth.appspot.com",
+    messagingSenderId: "887944170654",
+    appId: "1:887944170654:web:b29c69a1774fa51683ff8f",
+    measurementId: "G-MEKYMTMJPV"
+};
+
+// Initialize Firebase
+// const FireApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp.initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+
 
 const app = express();
 
@@ -8,6 +28,24 @@ app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
+
+
+
+// Get a list of cities from your database
+async function getUser(db) {
+    const usersCol = collection(db, 'Users');
+    const usersSnapshot = await getDocs(usersCol);
+    const usersList = usersSnapshot.docs.map(doc => doc.data());
+    console.log(usersList);
+    return usersList;
+}
+
+
+async function saveUser(userJson) {
+    console.log(userJson['email']);
+    await setDoc(doc(db, "Users", userJson.email), { userJson });
+}
+
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html");
@@ -28,7 +66,7 @@ app.post("/api/play", function (req, res) {
 });
 
 
-app.post("/api/save", function (req, res) {
+app.post("/api/save", async function (req, res) {
 
     console.log(req.body);
 
@@ -43,8 +81,9 @@ app.post("/api/save", function (req, res) {
     let gender = req.body.gender;
     let marriageStatus = req.body.marriageStatus;
 
+    // let ifhh = await getUser(db);
 
-    res.json({
+    userJson = {
         "Message": `Hello, ${fName}`,
         "First Name": `${fName}`,
         "Last Name": `${lName}`,
@@ -57,7 +96,11 @@ app.post("/api/save", function (req, res) {
         "gender": `${gender}`,
         "Marriage Status": `${marriageStatus}`,
         "UserStatus": "Saved"
-    });
+    };
+
+    // let saaaa = await saveUser(userJson);
+    // console.log(saaaa);
+    res.json(userJson);
 });
 
 app.get("/api/user/:id", function (req, res) {
