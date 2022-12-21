@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const initializeApp = require('firebase/app');
-const { getFirestore, collection, getDocs, setDoc, doc, getDoc } = require('firebase/firestore/lite');
+const { getFirestore, collection, getDocs, setDoc, doc, getDoc, updateDoc } = require('firebase/firestore/lite');
 const json = require("body-parser/lib/types/json");
 
 const firebaseConfig = {
@@ -91,8 +91,53 @@ async function saveUser(userJson) {
 
 }
 
-// Get a list of cities from your database
+async function registerUser(userMap) {
+    let userDetails = JSON.parse(userMap)
+
+    const usersRef = collection(db, "Users");
+    const userDoc = {
+        "email": `${userDetails.email}`,
+        "driversExpiryDate": `${userDetails.driversExpiryDate}`,
+        "driversLicense": `${userDetails.driversLicense}`,
+        "vehicleType": `${userDetails.vehicleType}`,
+        "nationalID": `${userDetails.nationalID}`,
+    };
+
+    try {
+        await updateDoc(doc(usersRef, userDetails.email), userDoc);
+
+        //Check if the email is valid
+
+        let user = await getUser(db, userDetails.email);
+
+        response = {
+            "firstName": `${user.firstName}`,
+            "lastName": `${user.lastName}`,
+            "emergencyContact": `${user.emergencyContact}`,
+            "phoneNumber": `${user.phoneNumber}`,
+            "emergencyCell": `${user.emergencyCell}`,
+            "address": `${user.address}`,
+            "dob": `${user.dob}`,
+            "gender": `${user.gender}`,
+            "marriageStatus": `${user.marriageStatus}`,
+            "email": `${user.email}`,
+            "driversExpiryDate": `${user.driversExpiryDate}`,
+            "driversLicense": `${user.driversLicense}`,
+            "vehicleType": `${user.vehicleType}`,
+            "nationalID": `${user.nationalID}`,
+            "userStatus": "Registration Complete"
+        };
+
+        return response;
+    } catch (error) {
+        console.log(`Error is: ${error}`);
+    }
+
+}
+
 async function getUser(db, userEmail) {
+
+    //if the email isn't valid here throw an error
 
     const docRef = doc(db, "Users", userEmail);
     const docSnap = await getDoc(docRef);
@@ -119,36 +164,40 @@ app.post("/api/save", async function (req, res) {
 
     console.log(req.body);
 
-    let fName = req.body.fName;
-    let lName = req.body.lName;
-    let email = req.body.email;
-    let eContact = req.body.eContact;
-    let phone = req.body.phone;
-    let eCell = req.body.eCell;
-    let address = req.body.address;
-    let dob = req.body.dob;
-    let gender = req.body.gender;
-    let marriageStatus = req.body.marriageStatus;
-
-    userJson = {
-        "message": `Hello, ${fName}`,
-        "firstName": `${fName}`,
-        "lastName": `${lName}`,
-        "email": `${email}`,
-        "emergencyContact": `${eContact}`,
-        "phoneNumber": `${phone}`,
-        "emergencyCell": `${eCell}`,
-        "address": `${address}`,
-        "dob": `${dob}`,
-        "gender": `${gender}`,
-        "marriageStatus": `${marriageStatus}`,
+    const userJson = {
+        "message": `Hello, ${req.body.fName}`,
+        "firstName": `${req.body.fName}`,
+        "lastName": `${req.body.lName}`,
+        "email": `${req.body.email}`,
+        "emergencyContact": `${req.body.eContact}`,
+        "phoneNumber": `${req.body.phone}`,
+        "emergencyCell": `${req.body.eCell}`,
+        "address": `${req.body.address}`,
+        "dob": `${req.body.dob}`,
+        "gender": `${req.body.gender}`,
+        "marriageStatus": `${req.body.marriageStatus}`,
         "userStatus": "Saved"
     };
 
-    // let user = await getUser(db, email);
+    const response = await saveUser(JSON.stringify(userJson));
+    res.json(response);
+});
 
-    const userJsonn = await saveUser(JSON.stringify(userJson));
-    res.json(userJsonn);
+app.put("/api/complete", async function (req, res) {
+
+    console.log(req.body);
+
+    const userMap = {
+        "email": `${req.body.userMap.email}`,
+        "driversExpiryDate": `${req.body.userMap.driversExpiryDate}`,
+        "driversLicense": `${req.body.userMap.driversLicense}`,
+        "vehicleType": `${req.body.userMap.vehicleType}`,
+        "nationalID": `${req.body.userMap.nationalID}`
+    };
+
+    const response = await registerUser(JSON.stringify(userMap));
+    res.json(response);
+
 });
 
 app.get("/api/user/:id", function (req, res) {
