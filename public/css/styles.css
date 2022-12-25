@@ -149,7 +149,7 @@ h6 {
 
 /* Media Query */
 @media (max-width: 700px) {
-    h1 {
+.big-heading {
         font-size: 1.5rem;
     }
 
