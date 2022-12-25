@@ -73,7 +73,7 @@ h3 {
 
 /* Title Image */
 .title-image {
-    width: 60%;
+    width: 40%;
     transform: rotate(25deg);
 }
 
@@ -138,6 +138,11 @@ h3 {
 /*CTA section*/
 .cta-title {
     color: white;
+}
+
+/* Footer Section */
+.social-icon{
+    margin: 20px 10px;
 }
 
 
