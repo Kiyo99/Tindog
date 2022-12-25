@@ -1,3 +1,27 @@
+body {
+    font-family: "Montserrat";
+    height: 100%;
+    width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Exo';
+    font-weight: bold;
+}
+
+/* headings */
+.big-heading {
+    font-size: 3.5rem;
+    line-height: 1.5;
+    font-weight: 900;
+    color: white;
+}
+
 #title {
     background-color: brown;
 }
@@ -11,12 +35,6 @@
 #press {
     background-color: brown;
     padding-bottom: 3%;
-}
-
-body {
-    font-family: "Montserrat";
-    height: 100%;
-    width: 100%;
 }
 
 #cta {
@@ -47,24 +65,7 @@ body {
     font-size: 2.5rem;
 }
 
-h1 {
-    font-family: 'Montserrat-Black, sans-serif';
-    font-size: 3.5rem;
-    line-height: 1.5;
-    font-weight: 900;
-    color: white;
-}
 
-h2 {
-    font-family: 'Exo';
-    font-weight: bold;
-}
-
-
-h3 {
-    font-family: 'Exo';
-    font-weight: bold;
-}
 
 /* Download Buttons */
 .download-button {
@@ -141,7 +142,7 @@ h3 {
 }
 
 /* Footer Section */
-.social-icon{
+.social-icon {
     margin: 20px 10px;
 }
 
