@@ -30,7 +30,11 @@ app.use(bodyParser.json())
 
 
 app.get("/", function (req, res) {
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/personal", function (req, res) {
+    res.sendFile(__dirname + "/public/personalsite.html");
 });
 
 app.post("/api/apple", function (req, res) {
