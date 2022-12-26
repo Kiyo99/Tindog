@@ -157,7 +157,7 @@ a:hover {
         height: 200px;
     }
 
-    .profile-img {
+    .fmidfile-img {
         width: 30%;
     }
 
@@ -179,6 +179,13 @@ a:hover {
         border: dotted;
         color: #EAF6F6;
         border-bottom: none;
-        margin: 40px auto;
+        margin: 20px auto;
+    }
+
+    .skill-row {
+        width: 50%;
+        margin: 20px auto;
+        text-align: left;
+        line-height: 2;
     }
 }
