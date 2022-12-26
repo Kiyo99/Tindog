@@ -141,3 +141,19 @@ hr {
     background-image: linear-gradient(to bottom, #30E3CB, #2BC4AD);
     text-decoration: none;
 }
+
+.mountain {}
+
+@media(max-width: 700px) {
+    /* h1 {
+        font-size: 2rem;
+    }
+
+    h2{
+        font-size: 20px;
+    } */
+
+    .mountain {
+        height: 200px;
+    }
+}
