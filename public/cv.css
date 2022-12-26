@@ -16,14 +16,37 @@ img {
 
 h1 {
     color: #129e9e;
+    font-size: 3rem;
 }
 
 h3 {
     color: #129e9e;
+    font-size: 2rem;
+}
+
+td {
+    font-size: 1.5rem;
+}
+
+th {
+    font-size: 1.5rem;
+}
+
+p,
+li {
+    font-size: 1.5rem;
 }
 
 .circular {
     border-radius: 100%;
+}
+
+.row {
+    display: flex;
+}
+
+.row-list {
+    margin-right: 30px;
 }
 
 
