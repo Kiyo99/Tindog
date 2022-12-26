@@ -32,7 +32,7 @@ h3 {
 
 hr {
     border: dotted;
-    color: #EAF6F6;
+    color: #40514E;
     width: 4%;
     border-bottom: none;
     margin: 60px auto;
@@ -85,7 +85,7 @@ a:hover {
     color: #EAF6F6;
 }
 
-.footer-link{
+.footer-link {
     color: black;
 }
 
@@ -154,7 +154,7 @@ a:hover {
 
 @media(max-width: 700px) {
     h1 {
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
 
     h2 {
@@ -167,10 +167,6 @@ a:hover {
 
     .profile-img {
         border-radius: 100%;
-        width: 30%;
-    }
-
-    .fmidfile-img {
         width: 30%;
     }
 
@@ -190,15 +186,25 @@ a:hover {
 
     hr {
         border: dotted;
-        color: #EAF6F6;
+        color: #40514E;
         border-bottom: none;
         margin: 20px auto;
     }
 
     .skill-row {
-        width: 50%;
+        width: 80%;
         margin: 20px auto;
         text-align: left;
         line-height: 2;
+    }
+
+    .contact-message {
+        width: 80%;
+        margin: 40px auto 60px;
+    }
+
+    .bio {
+        width: 80%;
+        margin: auto;
     }
 }
