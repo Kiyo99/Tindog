@@ -1,9 +1,9 @@
 body {
-    color: #40514E;
+    color: white;
     margin: 0px;
     text-align: center;
     font-family: 'Merriweather', serif;
-    background-color: white;
+    background-color: #40514E;
 }
 
 p {
@@ -36,6 +36,10 @@ hr {
     width: 4%;
     border-bottom: none;
     margin: 100px auto;
+}
+
+.profile-img {
+    border-radius: 100%;
 }
 
 .top-container {
