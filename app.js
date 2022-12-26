@@ -37,6 +37,10 @@ app.get("/personal", function (req, res) {
     res.sendFile(__dirname + "/public/personalsite.html");
 });
 
+app.get("/cv", function (req, res) {
+    res.sendFile(__dirname + "/public/cv.html");
+});
+
 app.post("/api/apple", function (req, res) {
     // res.send("<h1>Waiting to download apple app...")
     res.json({
