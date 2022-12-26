@@ -35,7 +35,7 @@ hr {
     color: #EAF6F6;
     width: 4%;
     border-bottom: none;
-    margin: 100px auto;
+    margin: 60px auto;
 }
 
 .profile-img {
@@ -53,12 +53,12 @@ hr {
 }
 
 .bio {
-    width: 30%;
+    width: 50%;
     margin: auto;
 }
 
 .bottom-container {
-    background-color: #66BFBF;
+    background-color: #11999E;
     padding: 50px 0 20px;
 }
 
@@ -83,6 +83,10 @@ a {
 
 a:hover {
     color: #EAF6F6;
+}
+
+.footer-link{
+    color: black;
 }
 
 .code-img {
@@ -159,6 +163,11 @@ a:hover {
 
     .mountain {
         height: 200px;
+    }
+
+    .profile-img {
+        border-radius: 100%;
+        width: 30%;
     }
 
     .fmidfile-img {
