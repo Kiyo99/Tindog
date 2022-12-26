@@ -86,19 +86,21 @@ a:hover {
 }
 
 .footer-link {
-    color: black;
+    color: #40514E;
 }
 
 .code-img {
     width: 25%;
     float: left;
     margin-right: 30px;
+    border-radius: 100%;
 }
 
 .playstore-img {
     width: 25%;
     float: right;
     margin-left: 30px;
+    border-radius: 100%;
 }
 
 .skill-row {
