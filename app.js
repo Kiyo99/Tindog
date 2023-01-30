@@ -5,14 +5,24 @@ const initializeApp = require('firebase/app');
 const { getFirestore, collection, getDocs, setDoc, doc, getDoc, updateDoc } = require('firebase/firestore/lite');
 const json = require("body-parser/lib/types/json");
 
+// const firebaseConfig = {
+//     apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
+//     authDomain: "pamo-auth.firebaseapp.com",
+//     projectId: "pamo-auth",
+//     storageBucket: "pamo-auth.appspot.com",
+//     messagingSenderId: "887944170654",
+//     appId: "1:887944170654:web:b29c69a1774fa51683ff8f",
+//     measurementId: "G-MEKYMTMJPV"
+// };
+
 const firebaseConfig = {
-    apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
-    authDomain: "pamo-auth.firebaseapp.com",
-    projectId: "pamo-auth",
-    storageBucket: "pamo-auth.appspot.com",
-    messagingSenderId: "887944170654",
-    appId: "1:887944170654:web:b29c69a1774fa51683ff8f",
-    measurementId: "G-MEKYMTMJPV"
+    apiKey: "AIzaSyC6j7D4iDpJ8UsYv0rE11xm4H5v9XZE4BQ",
+    authDomain: "authsystem-d11e7.firebaseapp.com",
+    projectId: "authsystem-d11e7",
+    storageBucket: "authsystem-d11e7.appspot.com",
+    messagingSenderId: "852881818879",
+    appId: "1:852881818879:web:13a049367c396e0bab78ca",
+    measurementId: "G-YYM1YGPQD9"
 };
 
 // Initialize Firebase
@@ -41,6 +51,10 @@ app.get("/cv", function (req, res) {
     res.sendFile(__dirname + "/public/cv.html");
 });
 
+app.get("/books", function (req, res) {
+    res.sendFile(__dirname + "/public/books.html");
+});
+
 app.post("/api/apple", function (req, res) {
     // res.send("<h1>Waiting to download apple app...")
     res.json({
@@ -55,6 +69,41 @@ app.post("/api/play", function (req, res) {
     });
 });
 
+
+async function authenticateUser(userJson) {
+    let user = JSON.parse(userJson)
+    const usersRef = collection(db, "Users");
+
+    const userMap = {
+        "fullName": `${user.fullName}`,
+        "email": `${user.email}`,
+        "phoneNumber": `${user.phoneNumber}`,
+        "password": `${user.password}`,
+    };
+
+    try {
+
+        //auth
+        // await Auth
+
+
+
+        //storing 
+        await setDoc(doc(usersRef, user.email), userMap);
+
+        userJson = {
+            "fullName": `${user.fullName}`,
+            "email": `${user.email}`,
+            "phoneNumber": `${user.phoneNumber}`,
+            "userStatus": "Saved"
+        };
+
+        return userJson;
+    } catch (error) {
+        console.log(`Error is: ${error}`);
+    }
+
+}
 
 async function saveUser(userJson) {
     let user = JSON.parse(userJson)
@@ -204,6 +253,20 @@ app.put("/api/complete", async function (req, res) {
     };
 
     const response = await registerUser(JSON.stringify(userMap));
+    res.json(response);
+
+});
+
+app.post("/api/register", async function (req, res) {
+    console.log(req.body);
+
+    const userMap = {
+        "fullname": `${req.body.fName}`,
+        "email": `${req.body.email}`,
+        "phoneNumber": `${req.body.phone}`,
+        "password": `${req.body.password}`
+    }
+    const response = await authenticateUser(JSON.stringify(userMap));
     res.json(response);
 
 });
