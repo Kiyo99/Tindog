@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const initializeApp = require('firebase/app');
-const { getFirestore, collection, getDocs, setDoc, doc, getDoc, updateDoc } = require('firebase/firestore/lite');
+const { getFirestore, collection, setDoc, doc, getDoc, updateDoc } = require('firebase/firestore/lite');
+const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const json = require("body-parser/lib/types/json");
 
 // const firebaseConfig = {
@@ -28,7 +29,9 @@ const firebaseConfig = {
 // Initialize Firebase
 // const FireApp = initializeApp(firebaseConfig);
 const firebaseApp = initializeApp.initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
+
 
 
 const app = express();
@@ -84,9 +87,7 @@ async function authenticateUser(userJson) {
     try {
 
         //auth
-        // await Auth
-
-
+        await createUserWithEmailAndPassword(auth, user.email, user.password);
 
         //storing 
         await setDoc(doc(usersRef, user.email), userMap);
