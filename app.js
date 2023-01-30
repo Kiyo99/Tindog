@@ -84,6 +84,8 @@ async function authenticateUser(userJson) {
         "password": `${user.password}`,
     };
 
+    console.log(user);
+
     try {
 
         //auth
@@ -262,9 +264,9 @@ app.post("/api/register", async function (req, res) {
     console.log(req.body);
 
     const userMap = {
-        "fullname": `${req.body.fName}`,
+        "fullName": `${req.body.fName}`,
         "email": `${req.body.email}`,
-        "phoneNumber": `${req.body.phone}`,
+        "phoneNumber": `${req.body.phoneNumber}`,
         "password": `${req.body.password}`
     }
     const response = await authenticateUser(JSON.stringify(userMap));
