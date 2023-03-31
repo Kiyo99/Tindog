@@ -2,9 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const initializeApp = require('firebase/app');
-const { getFirestore, collection, setDoc, doc, getDoc, updateDoc } = require('firebase/firestore/lite');
-const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
-const json = require("body-parser/lib/types/json");
+const { getFirestore, collection, setDoc, addDoc, doc, getDoc, updateDoc } = require('firebase/firestore/lite');
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require('firebase/auth');
 
 // const firebaseConfig = {
 //     apiKey: "AIzaSyAsBq7HUFQivzXrPwufbmezezPsgOFZJk4",
@@ -31,8 +30,6 @@ const firebaseConfig = {
 const firebaseApp = initializeApp.initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
-
-
 
 const app = express();
 
@@ -104,6 +101,47 @@ async function authenticateUser(userJson) {
         return userJson;
     } catch (error) {
         console.log(`Error is: ${error}`);
+
+        const errorJson = {
+            error
+        }
+        return errorJson
+    }
+
+}
+
+async function loginUser(userJson) {
+    let user = JSON.parse(userJson)
+    const usersRef = collection(db, "Users");
+
+    const userMap = {
+        "email": `${user.email}`,
+        "password": `${user.password}`,
+    };
+
+    try {
+
+        //auth
+        await signInWithEmailAndPassword(auth, user.email, user.password);
+
+        //getting 
+        let userDoc = await getUser(db, user.email);
+
+        userJson = {
+            "fullName": `${userDoc.fullName}`,
+            "email": `${userDoc.email}`,
+            "phoneNumber": `${userDoc.phoneNumber}`,
+            "userStatus": "Logged in"
+        };
+
+        return userJson;
+    } catch (error) {
+        console.log(`Error is: ${error}`);
+
+        const errorJson = {
+            error
+        }
+        return errorJson
     }
 
 }
@@ -191,6 +229,11 @@ async function registerUser(userMap) {
         return response;
     } catch (error) {
         console.log(`Error is: ${error}`);
+
+        const errorJson = {
+            error
+        }
+        return errorJson
     }
 
 }
@@ -270,24 +313,25 @@ app.post("/api/register", async function (req, res) {
         "password": `${req.body.password}`
     }
     const response = await authenticateUser(JSON.stringify(userMap));
+    console.log(`Reso: ${(JSON.stringify(response))}`);
     res.json(response);
 
 });
 
-app.get("/api/user/:id", function (req, res) {
-    if (req.params.id == 7) {
-        res.json({
-            "User": "Kio",
-            "Status": true,
-            "color": `${req.query.color}`
-        });
+app.post("/api/login", async function (req, res) {
+    console.log(req.body);
+
+    const userMap = {
+        "email": `${req.body.email}`,
+        "password": `${req.body.password}`
     }
-    else {
-        res.send(`You entered Id of ${req.params.id}`);
-    }
+
+    const response = await loginUser(JSON.stringify(userMap));
+    console.log(`Reso: ${(JSON.stringify(response))}`);
+    res.json(response);
+
 });
 
-
-app.listen(process.env.PORT || 3000, function () {
-    console.log("Server running on port 3000");
+app.listen(process.env.PORT || 3001, function () {
+    console.log("Server running on port 3001");
 });
